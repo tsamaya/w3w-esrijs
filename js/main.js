@@ -15,7 +15,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   var map = new Map('map', {
     center: [5.80749, 45.21433],
     zoom: 15,
-    basemap: 'dark-gray'
+    basemap: 'topo'
   });
   var w3wmarkerSymbol = new PictureMarkerSymbol('./img/w3wmarker.png', 32, 32);
   var markerLayer = new GraphicsLayer();
@@ -58,6 +58,9 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       updateW3w();
     });
 
+    $('#w3wul').on('clcik', function() {
+      alert('ici');
+    });
   }
 
   function getLangs() {
@@ -65,13 +68,16 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       'key': key
     };
     var langs = $('#lang');
+    var w3wul = $('#w3wul');
     $.post('https://api.what3words.com/get-languages', data, function(response) {
       console.log(response);
       $.each(response.languages, function() {
         if (this.code === 'fr') {
           langs.append($('<option />').val(this.code).text(this.name_display).prop('selected', true));
+          w3wul.append($('<li />').append($('<a />').text(this.name_display)));
         } else {
           langs.append($('<option />').val(this.code).text(this.name_display));
+          w3wul.append($('<li />').append($('<a />').text(this.name_display)));
         }
       });
     });
@@ -86,7 +92,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
 
     $.post('http://api.what3words.com/position', data, function(response) {
       console.log(response);
-      $('#w3w').text('W3W\n' +
+      $('#w3w').text(
         'words: ' + response.words[0] + ', ' + response.words[1] + ', ' + response.words[2] + '\n' +
         'position:' + response.position[0] + ', ' + response.position[1]);
     });
