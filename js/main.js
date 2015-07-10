@@ -117,7 +117,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
         if (this.code === 'fr') {
           langs.append($('<option />').val(this.code).text(this.name_display).prop('selected', true));
           w3wul.append($('<li />').prop('class', 'active').append($('<a />').text(this.name_display)));
-          $('#languagesHref').text('languages [fr] ');
+          $('#languagesHref').text('[fr]');
         } else {
           langs.append($('<option />').val(this.code).text(this.name_display));
           w3wul.append($('<li />').append($('<a />').text(this.name_display)));
