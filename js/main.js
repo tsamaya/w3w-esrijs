@@ -107,6 +107,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       });
       $('#languagesList li').click(function(e) {
         lang = e.target.hash.substr(1);
+        $('#languagesHref').text('['+lang+']');
         e.target.parentNode.className = 'active';
         if (selectedLng) {
           selectedLng.className = '';
