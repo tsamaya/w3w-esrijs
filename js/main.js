@@ -1,9 +1,9 @@
 require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLayer',
   'esri/geometry/Point', 'esri/SpatialReference', 'esri/graphic', 'esri/geometry/webMercatorUtils',
-  'app/bootstrapmap',
+  'app/bootstrapmap', 'esri/dijit/Search', 'esri/dijit/LocateButton',
   'dojo/domReady!'
 ], function(Map, PictureMarkerSymbol, GraphicsLayer, Point, SpatialReference,
-  Graphic, webMercatorUtils, BootstrapMap) {
+  Graphic, webMercatorUtils, BootstrapMap, Search, LocateButton) {
 
   var lang = 'fr'; // default language
   var key = 'Q4M51WJZ'; // this is my key
@@ -27,6 +27,15 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   })), w3wmarkerSymbol);
   markerLayer.add(graphic);
 
+  var s = new Search({
+    map: map
+  }, 'search');
+  s.startup();
+
+  var geoLocate = new LocateButton({
+    map: map
+  }, 'LocateButton');
+  geoLocate.startup();
   map.on('click', handleMapClick);
 
   $(document).ready(jQueryReady);
@@ -102,12 +111,12 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
         //   $('#languagesHref').text('[fr]');
         //} else {
         //langs.append($('<option />').val(this.code).text(this.name_display));
-        w3wul.append($('<li />').append($('<a />').attr('href', '#'+this.code).text(this.name_display)));
+        w3wul.append($('<li />').append($('<a />').attr('href', '#' + this.code).text(this.name_display)));
         //}
       });
       $('#languagesList li').click(function(e) {
         lang = e.target.hash.substr(1);
-        $('#languagesHref').text('['+lang+']');
+        $('#languagesHref').text('[' + lang + ']');
         e.target.parentNode.className = 'active';
         if (selectedLng) {
           selectedLng.className = '';

@@ -48,6 +48,21 @@ body > .container {
 .navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand {
   color: #fff
 }
+
+#search {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  z-index: 10;
+}
+
+#LocateButton {
+  position: absolute;
+  top: 100px;
+  right: 10px;
+  z-index: 10;
+}
+
 @media (max-width: 600px) {
   .navbar-default .navbar-nav .open .dropdown-menu>li>a {
     color: #fff;
