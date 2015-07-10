@@ -1,58 +1,55 @@
 /* Sticky footer styles
 -------------------------------------------------- */
+
 html {
-position: relative;
-min-height: 100%;
+  position: relative;
+  min-height: 100%;
 }
-
 body {
-/* Margin bottom by footer height */
-/*margin-bottom: 20px;*/
-font-size: 13px;
-font-family: "Open Sans";
-font-style: normal;
-font-weight: 400;
+  /* Margin bottom by footer height */
+  /*margin-bottom: 20px;*/
+  font-size: 13px;
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
 }
-
 .footer {
-position: relative;
-bottom: 0;
-width: 100%;
-/* Set the fixed height of the footer here */
-height: 120px;
-background-color: #e6323d;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 120px;
+  background-color: #e6323d;
 }
 
 /* Custom page CSS
 -------------------------------------------------- */
+
+
 /* Not required for template or sticky footer method. */
 
 body > .container {
-padding: 50px 15px 0;
+  padding: 50px 15px 0;
 }
-
 .container .text-muted {
-margin: 20px 0;
-color: #fff
+  margin: 20px 0;
+  color: #fff
 }
-
 .container .text-muted a {
-color: #fff
+  color: #fff
 }
-
 .footer > .container {
-padding-right: 15px;
-padding-left: 15px;
+  padding-right: 15px;
+  padding-left: 15px;
 }
-
 .navbar-default {
-background-color: #e6323d;
+  background-color: #e6323d;
 }
 .navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand {
   color: #fff
 }
 @media (max-width: 600px) {
-.navbar-default .navbar-nav .open .dropdown-menu>li>a {
-  color: #fff;
-}
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: #fff;
+  }
 }

@@ -7,7 +7,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
 
   var lang = 'fr'; // default language
   var key = 'Q4M51WJZ'; // this is my key
-  // default position
+  // default position is esri france Grenoble
   var w3wmarker = {
     lat: 45.21433,
     lng: 5.80749
@@ -48,49 +48,31 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     getLangs();
     updateW3w();
 
-    $('#lang').on('change', function() {
-      lang = $('#lang').val();
-      updateW3w();
-    });
-
-    // $('#w3wul').on('clcik', function() {
-    //   alert('ici');
+    // select utilisé tant que cela ne fonctionne pas avec la navbar
+    // $('#lang').on('change', function() {
+    //   lang = $('#lang').val();
+    //   updateW3w();
     // });
 
-    $("#w3wul li").click(function(e) {
-      e.target.prop('class', 'active');
+    $('#basemapList li').click(function(e) {
       switch (e.target.text) {
-        case "English":
-          lang = 'en';
+        case 'Imagery':
+          map.setBasemap('hybrid');
           break;
-        case "Français":
-          lang = 'fr';
+        case 'National Geographic':
+          map.setBasemap('national-geographic');
           break;
-      }
-      if ($(".navbar-collapse.in").length > 0) {
-        $(".navbar-toggle").click();
-      }
-    });
-
-    $("#basemapList li").click(function(e) {
-      switch (e.target.text) {
-        case "Imagery":
-          map.setBasemap("hybrid");
+        case 'Topographic':
+          map.setBasemap('topo');
           break;
-        case "National Geographic":
-          map.setBasemap("national-geographic");
+        case 'Gray':
+          map.setBasemap('gray');
           break;
-        case "Topographic":
-          map.setBasemap("topo");
+        case 'DarkGray':
+          map.setBasemap('dark-gray');
           break;
-        case "Gray":
-          map.setBasemap("gray");
-          break;
-        case "DarkGray":
-          map.setBasemap("dark-gray");
-          break;
-        case "Open Street Map":
-          map.setBasemap("osm");
+        case 'Open Street Map':
+          map.setBasemap('osm');
           break;
       }
       e.target.parentNode.className = 'active';
@@ -98,8 +80,8 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
         selectedBasemap.className = '';
       }
       selectedBasemap = e.target.parentNode;
-      if ($(".navbar-collapse.in").length > 0) {
-        $(".navbar-toggle").click();
+      if ($('.navbar-collapse.in').length > 0) {
+        $('.navbar-toggle').click();
       }
     });
 
@@ -109,20 +91,34 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     data = {
       'key': key
     };
-    var langs = $('#lang');
-    var w3wul = $('#w3wul');
+    //var langs = $('#lang'); // tant que cela fonctionne pas avec la navbar !
+    var w3wul = $('#languagesList ul');
     $.post('https://api.what3words.com/get-languages', data, function(response) {
       //console.log(response);
       $.each(response.languages, function() {
-        if (this.code === 'fr') {
-          langs.append($('<option />').val(this.code).text(this.name_display).prop('selected', true));
-          w3wul.append($('<li />').prop('class', 'active').append($('<a />').text(this.name_display)));
-          $('#languagesHref').text('[fr]');
-        } else {
-          langs.append($('<option />').val(this.code).text(this.name_display));
-          w3wul.append($('<li />').append($('<a />').text(this.name_display)));
-        }
+        // if (this.code === 'fr') {
+        //   langs.append($('<option />').val(this.code).text(this.name_display).prop('selected', true));
+        //   w3wul.append($('<li />').prop('class', 'active').append($('<a />').attr('href', '#'+this.code).text(this.name_display)));
+        //   $('#languagesHref').text('[fr]');
+        //} else {
+        //langs.append($('<option />').val(this.code).text(this.name_display));
+        w3wul.append($('<li />').append($('<a />').attr('href', '#'+this.code).text(this.name_display)));
+        //}
       });
+      $('#languagesList li').click(function(e) {
+        lang = e.target.hash.substr(1);
+        e.target.parentNode.className = 'active';
+        if (selectedLng) {
+          selectedLng.className = '';
+        }
+        selectedLng = e.target.parentNode;
+        updateW3w();
+        if ($('.navbar-collapse.in').length > 0) {
+          $('.navbar-toggle').click();
+        }
+
+      });
+
     });
   }
 
@@ -134,7 +130,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     };
 
     $.post('http://api.what3words.com/position', data, function(response) {
-      console.log(response);
+      //console.log(response);
       $('#w3Words').text(response.words[0] + ', ' + response.words[1] + ', ' + response.words[2]);
       $('#w3wlink').attr('href', 'http://w3w.co/' + response.words[0] + '.' + response.words[1] + '.' + response.words[2]);
       $('#w3wPosition').text(response.position[0] + ', ' + response.position[1]);
