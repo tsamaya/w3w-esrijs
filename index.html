@@ -5,19 +5,28 @@
   <meta charset="utf-8" />
   <title>What3Words with EsriJS (ArcGIS API for Javascript)</title>
   <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="apple-touch-icon" href="./img/brand.png">
+  <link rel="shortcut icon" href="./img/favicon.ico">
 
   <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.13/esri/css/esri.css" />
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,300">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
-
-  <!-- Custom styles for this template -->
-<style style="display:none">
-</style>
-
+  <link rel="stylesheet" type="text/css" href="css/bootstrapmap.css" />
+  <style>
+    #lang-wrapper {
+      position: absolute;
+      top: 50px;
+      right: 10px;
+      z-index: 10;
+      background: white;
+      padding: 10px;
+    }
+    .pannel {
+      margin-bottom: 5px;
+    }
+  </style>
 </head>
 
 <body>
@@ -38,15 +47,22 @@
           <li class="active"><a href="#">Map</a></li>
           <li><a href="#about">About</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">languages <span class="caret"></span></a>
-            <ul class="dropdown-menu" id="w3wul">
-              <li><a href="#">Action</a></li>
-              <li><a href="#">Another action</a></li>
-              <li><a href="#">Something else here</a></li>
-              <li role="separator" class="divider"></li>
-              <li class="dropdown-header">Nav header</li>
-              <li><a href="#">Separated link</a></li>
-              <li><a href="#">One more separated link</a></li>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span id='languagesHref'>languages </span>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" id="w3wul"></ul>
+          </li>
+          <li class="dropdown" id="basemapList">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">Maps <b class="caret"></b></a>
+            <ul class="dropdown-menu" id="myDropdown">
+              <li><a href="#">Topographic</a></li>
+              <li><a href="#">Imagery</a></li>
+              <!--<li><a href="#">National Geographic</a></li>
+                <li><a href="#">Gray</a></li>
+                <li><a href="#">DarkGray</a></li>-->
+              <li class="divider"></li>
+              <li><a href="#">Open Street Map</a></li>
             </ul>
           </li>
         </ul>
@@ -57,12 +73,16 @@
 
   <!-- Begin page content -->
   <div class="container">
-    <div id="map"></div>
+    <div id="mapDiv" class="map"></div>
   </div>
 
   <footer class="footer">
     <div class="container">
-      <p class="text-muted"><span id="w3w" class="pannel"></span></p>
+      <p class="text-muted">words:
+        <span id="w3Words" class="pannel"></span>&nbsp;<a href="#" id="w3wlink" target="_blank">> go to w3w</a></p>
+      <p class="text-muted">position:
+        <span id="w3wPosition" class="pannel"></span>
+      </p>
     </div>
   </footer>
 
@@ -71,9 +91,21 @@
     <select name="lang" id="lang" class="pannel">
     </select>
   </div>
+  <script type="text/javascript">
+    var pckgPath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+    var dojoConfig = {
+      //The location.pathname.replace() logic below may look confusing but all its doing is
+      // enabling us to load the api from a CDN and load local modules from the correct location.
+      packages: [{
+        name: "app",
+        location: pckgPath + '/js'
+      }]
+    };
+  </script>
   <script src="//js.arcgis.com/3.13/"></script>
   <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
   <script src="js/main.js"></script>
 </body>
 
