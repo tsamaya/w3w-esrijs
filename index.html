@@ -46,16 +46,9 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">Map</a></li>
-          <li><a href="#about">About</a></li>
-          <li class="dropdown" id="languagesList">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">languages&nbsp;<span id='languagesHref'></span>&nbsp;
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" id="myDropdownLanguages">
-            </ul>
-          </li>
+          <!--<li><a href="#about">About</a></li>-->
           <li class="dropdown" id="basemapList">
-            <a href="" class="dropdown-toggle" data-toggle="dropdown">Maps <b class="caret"></b></a>
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">Basemaps <b class="caret"></b></a>
             <ul class="dropdown-menu" id="myDropdownBasemaps">
               <li><a href="#">Topographic</a></li>
               <li><a href="#">Imagery</a></li>
@@ -64,6 +57,13 @@
               <!--<li><a href="#">DarkGray</a></li>-->
               <li class="divider"></li>
               <li><a href="#">Open Street Map</a></li>
+            </ul>
+          </li>
+          <li class="dropdown" id="languagesList">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">languages&nbsp;<span id='languagesHref'></span>&nbsp;
+            <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" id="myDropdownLanguages">
             </ul>
           </li>
         </ul>
@@ -81,8 +81,8 @@
 
   <footer class="footer">
     <div class="container">
-      <p class="text-muted">words:
-        <span id="w3Words" class="pannel"></span>&nbsp;<a href="#" id="w3wlink" target="_blank">go to w3w</a></p>
+      <p class="text-muted"><a href="#" id="w3wlink" target="_blank"><img src="./img/w3w_logo.png" alt="go to w3w" width="23" height="30"></a>
+        &nbsp;<span id="w3Words" class="pannel"></span></p>
       <p class="text-muted">position:
         <span id="w3wPosition" class="pannel"></span>
       </p>
