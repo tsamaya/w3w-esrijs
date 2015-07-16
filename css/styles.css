@@ -29,7 +29,8 @@ body {
 /* Not required for template or sticky footer method. */
 
 body > .container {
-  padding: 50px 15px 0;
+  padding: 40px 0 0; /*15px 0;*/
+  width: 100%
 }
 .container .text-muted {
   margin: 20px 0;
@@ -55,6 +56,10 @@ body > .container {
   right: 10px;
   z-index: 10;
 }
+.LocateButton .zoomLocateButton {
+  background-color: #cdcdcd;
+
+}
 
 #LocateButton {
   position: absolute;
@@ -66,5 +71,9 @@ body > .container {
 @media (max-width: 600px) {
   .navbar-default .navbar-nav .open .dropdown-menu>li>a {
     color: #fff;
+  }
+
+  .navbar-default .navbar-toggle .icon-bar  {
+    background-color: #fff;
   }
 }

@@ -7,61 +7,77 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
 
   var lang = 'fr'; // default language
   var key = 'Q4M51WJZ'; // this is my key
-  // default position is esri france Grenoble
+  // default position is downtown Grenoble, France
   var w3wmarker = {
-    lat: 45.21433,
-    lng: 5.80749
+    lat: 45.188996,
+    lng: 5.724614
   };
   var graphic, selectedLng, selectedBasemap;
   var map = BootstrapMap.create('mapDiv', {
-    center: [5.80749, 45.21433],
+    center: [w3wmarker.lng, w3wmarker.lat],
     zoom: 15,
-    basemap: 'topo'
+    basemap: 'satellite'
   });
+  // handle map click to update w3w marker and words
+  map.on('click', handleMapClick);
+  // picture symbol
   var w3wmarkerSymbol = new PictureMarkerSymbol('./img/w3wmarker.png', 35, 35);
   var markerLayer = new GraphicsLayer();
   map.addLayer(markerLayer);
-
-  graphic = new Graphic(new Point(5.80749, 45.21433, new SpatialReference({
+  // w3w graphic marker
+  graphic = new Graphic(new Point(w3wmarker.lng, w3wmarker.lat, new SpatialReference({
     wkid: 4326
   })), w3wmarkerSymbol);
   markerLayer.add(graphic);
-
+  // search Widget (geocoder)
   var s = new Search({
-    map: map
+    map: map,
+    enableHighlight: false,
+    enableInfoWindow: false
   }, 'search');
   s.startup();
-
+  // handle search result to update w3w marker and words
+  s.on('select-result', function(e) {
+    updateMarker(e.result.feature.geometry);
+  });
+  // geolocate widget
   var geoLocate = new LocateButton({
-    map: map
+    map: map,
+    highlightLocation: false,
+    useTracking: false
   }, 'LocateButton');
   geoLocate.startup();
-  map.on('click', handleMapClick);
+  // handle search result to update w3w marker and words
+  geoLocate.on('locate', function(e) {
+    console.log(e);
+    updateMarker(e.graphic.geometry);
+  });
 
   $(document).ready(jQueryReady);
 
   function handleMapClick(event) {
+    updateMarker(event.mapPoint);
+  }
+
+  function updateMarker(mapPoint) {
+    if( !mapPoint ) {
+      return;
+    }
     if (graphic) {
-      graphic.setGeometry(event.mapPoint);
+      graphic.setGeometry(mapPoint);
     } else {
-      graphic = new Graphic(event.mapPoint, markerSymbol);
+      graphic = new Graphic(mapPoint, markerSymbol);
       map.graphics.add(graphic);
     }
-    var p = webMercatorUtils.webMercatorToGeographic(event.mapPoint);
+    var p = webMercatorUtils.webMercatorToGeographic(mapPoint);
     w3wmarker.lat = p.y;
     w3wmarker.lng = p.x;
-    updateW3w(event);
+    updateW3w();
   }
 
   function jQueryReady() {
     getLangs();
     updateW3w();
-
-    // select utilisé tant que cela ne fonctionne pas avec la navbar
-    // $('#lang').on('change', function() {
-    //   lang = $('#lang').val();
-    //   updateW3w();
-    // });
 
     $('#basemapList li').click(function(e) {
       switch (e.target.text) {
@@ -132,7 +148,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     });
   }
 
-  function updateW3w(e) {
+  function updateW3w() {
     data = {
       'key': key,
       'lang': lang,
