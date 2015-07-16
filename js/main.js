@@ -1,9 +1,11 @@
 require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLayer',
   'esri/geometry/Point', 'esri/SpatialReference', 'esri/graphic', 'esri/geometry/webMercatorUtils',
   'app/bootstrapmap', 'esri/dijit/Search', 'esri/dijit/LocateButton',
+  'esri/layers/WebTiledLayer', 'dojo/_base/array',
   'dojo/domReady!'
 ], function(Map, PictureMarkerSymbol, GraphicsLayer, Point, SpatialReference,
-  Graphic, webMercatorUtils, BootstrapMap, Search, LocateButton) {
+  Graphic, webMercatorUtils, BootstrapMap, Search, LocateButton, WebTiledLayer,
+  array) {
   var lang = 'fr'; // default language
   var key = 'Q4M51WJZ'; // this is my key
   // default position is downtown Grenoble, France
@@ -21,6 +23,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       });
     }
   }
+
   function getInitalWords(str) {
     return str.substr(1);
   }
@@ -73,7 +76,9 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   }
 
   function updateMarkerWithLatLng() {
-    var p = new Point(w3wmarker.lng, w3wmarker.lat, new SpatialReference({ wkid: 4326 }));
+    var p = new Point(w3wmarker.lng, w3wmarker.lat, new SpatialReference({
+      wkid: 4326
+    }));
     if (graphic) {
       graphic.setGeometry(p);
     } else {
@@ -82,6 +87,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     }
     map.centerAt(p);
   }
+
   function updateMarker(mapPoint) {
     if (!mapPoint) {
       return;
@@ -103,8 +109,13 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     updateW3w();
 
     $('#basemapList li').click(function(e) {
+      clearBasemap();
+      //  WebTiledLayers => http://leaflet-extras.github.io/leaflet-providers/preview/
       switch (e.target.text) {
         case 'Imagery':
+          map.setBasemap('satellite');
+          break;
+        case 'Hybrid':
           map.setBasemap('hybrid');
           break;
         case 'National Geographic':
@@ -122,6 +133,54 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
         case 'Open Street Map':
           map.setBasemap('osm');
           break;
+        case 'MapBox Space':
+          var mbs = new WebTiledLayer('http://${subDomain}.tiles.mapbox.com/v3/eleanor.ipncow29/${level}/${col}/${row}.jpg', {
+            copyright: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://mapbox.com">Mapbox</a>',
+            id: 'mapbox-space',
+            subDomains: ['a', 'b', 'c', 'd']
+          });
+          map.addLayer(mbs);
+          break;
+        case 'Pinterest':
+          var pinterest = new WebTiledLayer('http://${subDomain}.tiles.mapbox.com/v3/pinterest.map-ho21rkos/${level}/${col}/${row}.jpg', {
+            copyright: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery &copy; <a href="http://pinterest.com">Pinterest</a> &amp; <a href="http://mapbox.com">Mapbox</a>',
+            id: 'pinterest',
+            subDomains: ['a', 'b', 'c', 'd']
+          });
+          map.addLayer(pinterest);
+          break;
+        case 'Water Color':
+          var waterColor = new WebTiledLayer('http://${subDomain}.tile.stamen.com/watercolor/${level}/${col}/${row}.jpg', {
+            copyright: 'Stamen',
+            id: 'water-color',
+            subDomains: ['a', 'b', 'c', 'd']
+          });
+          map.addLayer(waterColor);
+          break;
+        case 'Toner':
+          var toner = new WebTiledLayer('http://${subDomain}.tile.stamen.com/toner/${level}/${col}/${row}.jpg', {
+            copyright: 'Stamen',
+            id: 'toner',
+            subDomains: ['a', 'b', 'c', 'd']
+          });
+          map.addLayer(toner);
+          break;
+        case 'MapQuest':
+          var mapQuest = new WebTiledLayer('http://otile${subDomain}.mqcdn.com/tiles/1.0.0/map/${level}/${col}/${row}.jpg', {
+            copyright: 'Tiles Courtesy of <a href="http://www.mapquest.com/">MapQuest</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+            id: 'mapquest',
+            subDomains: ['1', '2', '3', '4']
+          });
+          map.addLayer(mapQuest);
+          break;
+        case 'Cycle Map':
+          var cycleMap = new WebTiledLayer('http://${subDomain}.tile.opencyclemap.org/cycle/${level}/${col}/${row}.png', {
+            'copyright': 'Open Cycle Map, map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            'id': 'Open Cycle Map',
+            'subDomains': ['a', 'b', 'c']
+          });
+          map.addLayer(cycleMap);
+          break;
       }
       e.target.parentNode.className = 'active';
       if (selectedBasemap) {
@@ -133,6 +192,17 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       }
     });
 
+  }
+
+  function clearBasemap() {
+    if (map.basemapLayerIds && map.basemapLayerIds.length > 0) {
+      array.forEach(map.basemapLayerIds, function(lid) {
+        map.removeLayer(map.getLayer(lid));
+      });
+      map.basemapLayerIds = [];
+    } else {
+      map.removeLayer(map.getLayer(map.layerIds[0]));
+    }
   }
 
   function getLangs() {
