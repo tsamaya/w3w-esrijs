@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" href="./img/w3wmarker.png">
   <link rel="shortcut icon" href="./img/favicon.ico">
 
-  <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.13/esri/css/esri.css" />
+  <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.14/esri/css/esri.css" />
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,300">
   <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <!--<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
@@ -52,10 +52,6 @@
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" id="myDropdownLanguages">
-            <!--
-            <li><a href="#de">Deutsch (beta)</a></li><li><a href="#en">English</a></li><li><a href="#es">Español</a></li><li class="active"><a href="#fr">Français</a></li><li><a href="#pt">Português</a>
-            </li>
-            <li><a href="#ru">Русский (beta)</a></li><li><a href="#sv">Svenska (beta)</a></li><li><a href="#sw">Kiswahili</a></li><li><a href="#tr">Türkçe (beta)</a></li>-->
             </ul>
           </li>
           <li class="dropdown" id="basemapList">
@@ -63,9 +59,9 @@
             <ul class="dropdown-menu" id="myDropdownBasemaps">
               <li><a href="#">Topographic</a></li>
               <li><a href="#">Imagery</a></li>
-              <!--<li><a href="#">National Geographic</a></li>
-                <li><a href="#">Gray</a></li>
-                <li><a href="#">DarkGray</a></li>-->
+              <!--<li><a href="#">National Geographic</a></li>-->
+              <!--<li><a href="#">Gray</a></li>-->
+              <!--<li><a href="#">DarkGray</a></li>-->
               <li class="divider"></li>
               <li><a href="#">Open Street Map</a></li>
             </ul>
@@ -79,12 +75,14 @@
   <!-- Begin page content -->
   <div class="container">
     <div id="mapDiv" class="map"></div>
+    <div id="search"></div>
+    <div id="LocateButton"></div>
   </div>
 
   <footer class="footer">
     <div class="container">
       <p class="text-muted">words:
-        <span id="w3Words" class="pannel"></span>&nbsp;<a href="#" id="w3wlink" target="_blank">> go to w3w</a></p>
+        <span id="w3Words" class="pannel"></span>&nbsp;<a href="#" id="w3wlink" target="_blank">go to w3w</a></p>
       <p class="text-muted">position:
         <span id="w3wPosition" class="pannel"></span>
       </p>
@@ -96,7 +94,7 @@
     <select name="lang" id="lang" class="pannel">
     </select>
   </div>-->
-  
+
   <script type="text/javascript">
     var pckgPath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
     var dojoConfig = {
@@ -108,7 +106,7 @@
       }]
     };
   </script>
-  <script src="//js.arcgis.com/3.13/"></script>
+  <script src="//js.arcgis.com/3.14/"></script>
   <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
