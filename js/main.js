@@ -4,7 +4,6 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   'dojo/domReady!'
 ], function(Map, PictureMarkerSymbol, GraphicsLayer, Point, SpatialReference,
   Graphic, webMercatorUtils, BootstrapMap, Search, LocateButton) {
-
   var lang = 'fr'; // default language
   var key = 'Q4M51WJZ'; // this is my key
   // default position is downtown Grenoble, France
@@ -12,6 +11,19 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     lat: 45.188996,
     lng: 5.724614
   };
+  var initialWords = null;
+  if (window.location.search) {
+    initialWords = getInitalWords(window.location.search);
+    if (initialWords) {
+      initPosition(initialWords, function() {
+        updateW3w();
+        updateMarkerWithLatLng();
+      });
+    }
+  }
+  function getInitalWords(str) {
+    return str.substr(1);
+  }
   var graphic, selectedLng, selectedBasemap;
   var map = BootstrapMap.create('mapDiv', {
     center: [w3wmarker.lng, w3wmarker.lat],
@@ -34,7 +46,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   var s = new Search({
     map: map,
     enableHighlight: false,
-    enableInfoWindow: false    
+    enableInfoWindow: false
   }, 'search');
   s.startup();
   // handle search result to update w3w marker and words
@@ -60,8 +72,18 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     updateMarker(event.mapPoint);
   }
 
+  function updateMarkerWithLatLng() {
+    var p = new Point(w3wmarker.lng, w3wmarker.lat, new SpatialReference({ wkid: 4326 }));
+    if (graphic) {
+      graphic.setGeometry(p);
+    } else {
+      graphic = new Graphic(p, markerSymbol);
+      map.graphics.add(graphic);
+    }
+    map.centerAt(p);
+  }
   function updateMarker(mapPoint) {
-    if( !mapPoint ) {
+    if (!mapPoint) {
       return;
     }
     if (graphic) {
@@ -163,4 +185,21 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       $('#w3wPosition').text(response.position[0] + ', ' + response.position[1]);
     });
   }
+
+  function initPosition(words, callback) {
+    data = {
+      'key': key,
+      'string': decodeURIComponent(words)
+    };
+
+    $.post('http://api.what3words.com/w3w', data, function(response) {
+      console.log(response);
+      if (!response.error) {
+        w3wmarker.lat = response.position[0];
+        w3wmarker.lng = response.position[1];
+        callback('ok');
+      }
+    });
+  }
+
 });
