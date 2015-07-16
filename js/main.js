@@ -16,6 +16,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   var map = BootstrapMap.create('mapDiv', {
     center: [w3wmarker.lng, w3wmarker.lat],
     zoom: 15,
+    scrollWheelZoom: true,
     basemap: 'satellite'
   });
   // handle map click to update w3w marker and words
@@ -33,7 +34,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   var s = new Search({
     map: map,
     enableHighlight: false,
-    enableInfoWindow: false
+    enableInfoWindow: false    
   }, 'search');
   s.startup();
   // handle search result to update w3w marker and words

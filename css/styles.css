@@ -1,6 +1,6 @@
-/* Sticky footer styles
+/* --------------------------------------------------
+ Custom CSS
 -------------------------------------------------- */
-
 html {
   position: relative;
   min-height: 100%;
@@ -22,12 +22,13 @@ body {
   background-color: #e6323d;
 }
 
-/* Custom page CSS
--------------------------------------------------- */
-
-
-/* Not required for template or sticky footer method. */
-
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+  /*border-bottom: 2px solid white;*/
+  color: #fff;
+}
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+  color: #fff;
+}
 body > .container {
   padding: 40px 0 0; /*15px 0;*/
   width: 100%
@@ -57,8 +58,7 @@ body > .container {
   z-index: 10;
 }
 .LocateButton .zoomLocateButton {
-  background-color: #cdcdcd;
-
+  background-color: #e6323d;
 }
 
 #LocateButton {
@@ -66,6 +66,15 @@ body > .container {
   top: 100px;
   right: 10px;
   z-index: 10;
+}
+
+.arcgisSearch .searchGroup .searchInput, .arcgisSearch .searchBtn {
+  background-color: #e6323d;
+  color: #fff
+}
+.esri-icon-close {
+  background-color: #e6323d;
+  color: #fff
 }
 
 @media (max-width: 600px) {
