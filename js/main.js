@@ -255,8 +255,9 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
 
     $.post('http://api.what3words.com/position', data, function(response) {
       //console.log(response);
-      $('#w3Words').text(response.words[0] + '.' + response.words[1] + '.' + response.words[2]);
-      $('#w3wlink').attr('href', 'http://w3w.co/' + response.words[0] + '.' + response.words[1] + '.' + response.words[2]);
+      var w3w = response.words[0] + '.' + response.words[1] + '.' + response.words[2];
+      $('#w3Words').text(w3w);
+      $('#w3wlink').attr('href', 'http://w3w.co/' + w3w);
       $('#w3wPosition').text(response.position[0] + ', ' + response.position[1]);
     });
   }
