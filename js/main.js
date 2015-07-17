@@ -6,12 +6,17 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
 ], function(Map, PictureMarkerSymbol, GraphicsLayer, Point, SpatialReference,
   Graphic, webMercatorUtils, BootstrapMap, Search, LocateButton, WebTiledLayer,
   array) {
-  var lang = 'fr'; // default language
-  var key = 'Q4M51WJZ'; // this is my key
+  var lang = 'en'; // default language
+  var key = 'Q4M51WJZ'; // this is my key !
   // default position is downtown Grenoble, France
+  // var w3wmarker = {
+  //   lat: 45.188996,
+  //   lng: 5.724614
+  // };
+  // default position at San Diego Convention Center
   var w3wmarker = {
-    lat: 45.188996,
-    lng: 5.724614
+    lat: 32.706514,
+    lng: -117.163384
   };
   var initialWords = null;
   if (window.location.search) {
@@ -30,7 +35,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   var graphic, selectedLng, selectedBasemap;
   var map = BootstrapMap.create('mapDiv', {
     center: [w3wmarker.lng, w3wmarker.lat],
-    zoom: 15,
+    zoom: 18,
     scrollWheelZoom: true,
     basemap: 'satellite'
   });
@@ -250,8 +255,9 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
 
     $.post('http://api.what3words.com/position', data, function(response) {
       //console.log(response);
-      $('#w3Words').text(response.words[0] + ', ' + response.words[1] + ', ' + response.words[2]);
-      $('#w3wlink').attr('href', 'http://w3w.co/' + response.words[0] + '.' + response.words[1] + '.' + response.words[2]);
+      var w3w = response.words[0] + '.' + response.words[1] + '.' + response.words[2];
+      $('#w3Words').text(w3w);
+      $('#w3wlink').attr('href', 'http://w3w.co/' + w3w);
       $('#w3wPosition').text(response.position[0] + ', ' + response.position[1]);
     });
   }
