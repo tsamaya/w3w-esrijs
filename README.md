@@ -12,7 +12,7 @@ The application demonstrates integration of ArcGIS API for JavaScript API with w
 * [ArcGIS API for JavaScript](//js.arcgis.com)
 * [JQuery](//jquery.com)
 * [Bootstrap](//getbootstrap.com)
-* [twitter@tsamaya](//twitter.com/tsamaya)
+* [twitter@arferrand](//twitter.com/arferrand)
 
 ## Issues
 Find a bug or want to request a new feature? Please let us know by submitting an issue.
