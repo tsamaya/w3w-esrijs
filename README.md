@@ -10,6 +10,7 @@ The application demonstrates integration of ArcGIS API for JavaScript API with w
 ## Resources
 * [what3words](//what3words.com)
 * [ArcGIS API for JavaScript](//js.arcgis.com)
+* [Bootstrap-map-js](http://esri.github.io/bootstrap-map-js/demo/index.html)
 * [JQuery](//jquery.com)
 * [Bootstrap](//getbootstrap.com)
 * [twitter@arferrand](//twitter.com/arferrand)

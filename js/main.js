@@ -1,11 +1,12 @@
+// WARNING this is not a production code, this is only a draft !
 require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLayer',
   'esri/geometry/Point', 'esri/SpatialReference', 'esri/graphic', 'esri/geometry/webMercatorUtils',
   'app/bootstrapmap', 'esri/dijit/Search', 'esri/dijit/LocateButton',
-  'esri/layers/WebTiledLayer', 'dojo/_base/array',
+  'esri/layers/WebTiledLayer', 'dojo/_base/array', 'spin-js/spin',
   'dojo/domReady!'
 ], function(Map, PictureMarkerSymbol, GraphicsLayer, Point, SpatialReference,
   Graphic, webMercatorUtils, BootstrapMap, Search, LocateButton, WebTiledLayer,
-  array) {
+  array, Spinner) {
   var lang = 'en'; // default language
   var key = 'Q4M51WJZ'; // this is my key !
   // default position is downtown Grenoble, France
@@ -28,7 +29,32 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       });
     }
   }
-
+  // sets up and shows the spinner
+  var opts = {
+    lines: 13 // The number of lines to draw
+  , length: 14 // The length of each line
+  , width: 7 // The line thickness
+  , radius: 21 // The radius of the inner circle
+  , scale: 1 // Scales overall size of the spinner
+  , corners: 1 // Corner roundness (0..1)
+  , color: '#000' // #rgb or #rrggbb or array of colors
+  , opacity: 0.25 // Opacity of the lines
+  , rotate: 0 // The rotation offset
+  , direction: 1 // 1: clockwise, -1: counterclockwise
+  , speed: 1 // Rounds per second
+  , trail: 60 // Afterglow percentage
+  , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+  , zIndex: 2e9 // The z-index (defaults to 2000000000)
+  , className: 'spinner' // The CSS class to assign to the spinner
+  , top: '50%' // Top position relative to parent
+  , left: '50%' // Left position relative to parent
+  , shadow: false // Whether to render a shadow
+  , hwaccel: false // Whether to use hardware acceleration
+  , position: 'absolute' // Element positioning
+  }
+  var spinnerTarget = document.getElementById('spinner')
+  var spinner = new Spinner(opts).spin(spinnerTarget);
+  // init with three words
   function getInitalWords(str) {
     return str.substr(1);
   }
@@ -41,6 +67,13 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   });
   // handle map click to update w3w marker and words
   map.on('click', handleMapClick);
+  // map.on('update-start', function() {
+  //   spinner.spin(spinnerTarget);
+  // });
+  // map.on('update-end', function(){
+  //   spinner.stop();
+  // });
+
   // picture symbol
   var w3wmarkerSymbol = new PictureMarkerSymbol('./img/w3wmarker.png', 35, 35);
   var markerLayer = new GraphicsLayer();
@@ -187,11 +220,11 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
           map.addLayer(cycleMap);
           break;
       }
-      e.target.parentNode.className = 'active';
+      e.spinnerTarget.parentNode.className = 'active';
       if (selectedBasemap) {
         selectedBasemap.className = '';
       }
-      selectedBasemap = e.target.parentNode;
+      selectedBasemap = e.spinnerTarget.parentNode;
       if ($('.navbar-collapse.in').length > 0) {
         $('.navbar-toggle').click();
       }
@@ -229,13 +262,13 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
         //}
       });
       $('#languagesList li').click(function(e) {
-        lang = e.target.hash.substr(1);
+        lang = e.spinnerTarget.hash.substr(1);
         $('#languagesHref').text('[' + lang + ']');
-        e.target.parentNode.className = 'active';
+        e.spinnerTarget.parentNode.className = 'active';
         if (selectedLng) {
           selectedLng.className = '';
         }
-        selectedLng = e.target.parentNode;
+        selectedLng = e.spinnerTarget.parentNode;
         updateW3w();
         if ($('.navbar-collapse.in').length > 0) {
           $('.navbar-toggle').click();
@@ -252,8 +285,9 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       'lang': lang,
       'position': '\'' + w3wmarker.lat + ',' + w3wmarker.lng + '\''
     };
-
+    spinner.spin(spinnerTarget);
     $.post('http://api.what3words.com/position', data, function(response) {
+      spinner.stop();
       //console.log(response);
       var w3w = response.words[0] + '.' + response.words[1] + '.' + response.words[2];
       $('#w3Words').text(w3w);
@@ -269,11 +303,13 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     };
 
     $.post('http://api.what3words.com/w3w', data, function(response) {
-      console.log(response);
       if (!response.error) {
         w3wmarker.lat = response.position[0];
         w3wmarker.lng = response.position[1];
         callback('ok');
+      } else {
+        console.log(response);
+        spinner.stop();
       }
     });
   }
