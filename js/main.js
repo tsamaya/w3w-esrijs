@@ -32,25 +32,44 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   // sets up and shows the spinner
   var opts = {
     lines: 13 // The number of lines to draw
-  , length: 14 // The length of each line
-  , width: 7 // The line thickness
-  , radius: 21 // The radius of the inner circle
-  , scale: 1 // Scales overall size of the spinner
-  , corners: 1 // Corner roundness (0..1)
-  , color: '#000' // #rgb or #rrggbb or array of colors
-  , opacity: 0.25 // Opacity of the lines
-  , rotate: 0 // The rotation offset
-  , direction: 1 // 1: clockwise, -1: counterclockwise
-  , speed: 1 // Rounds per second
-  , trail: 60 // Afterglow percentage
-  , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
-  , zIndex: 2e9 // The z-index (defaults to 2000000000)
-  , className: 'spinner' // The CSS class to assign to the spinner
-  , top: '50%' // Top position relative to parent
-  , left: '50%' // Left position relative to parent
-  , shadow: false // Whether to render a shadow
-  , hwaccel: false // Whether to use hardware acceleration
-  , position: 'absolute' // Element positioning
+      ,
+    length: 14 // The length of each line
+      ,
+    width: 7 // The line thickness
+      ,
+    radius: 21 // The radius of the inner circle
+      ,
+    scale: 1 // Scales overall size of the spinner
+      ,
+    corners: 1 // Corner roundness (0..1)
+      ,
+    color: '#000' // #rgb or #rrggbb or array of colors
+      ,
+    opacity: 0.25 // Opacity of the lines
+      ,
+    rotate: 0 // The rotation offset
+      ,
+    direction: 1 // 1: clockwise, -1: counterclockwise
+      ,
+    speed: 1 // Rounds per second
+      ,
+    trail: 60 // Afterglow percentage
+      ,
+    fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+      ,
+    zIndex: 2e9 // The z-index (defaults to 2000000000)
+      ,
+    className: 'spinner' // The CSS class to assign to the spinner
+      ,
+    top: '50%' // Top position relative to parent
+      ,
+    left: '50%' // Left position relative to parent
+      ,
+    shadow: false // Whether to render a shadow
+      ,
+    hwaccel: false // Whether to use hardware acceleration
+      ,
+    position: 'absolute' // Element positioning
   }
   var spinnerTarget = document.getElementById('spinner')
   var spinner = new Spinner(opts).spin(spinnerTarget);
@@ -103,7 +122,8 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   geoLocate.startup();
   // handle search result to update w3w marker and words
   geoLocate.on('locate', function(e) {
-    console.log(e);
+    //spinner.stop();
+    //console.log(e);
     updateMarker(e.graphic.geometry);
   });
 
@@ -146,6 +166,9 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     getLangs();
     updateW3w();
 
+    $('#LocateButton').click(function(e) {
+      spinner.spin(spinnerTarget);
+    });
     $('#basemapList li').click(function(e) {
       clearBasemap();
       //  WebTiledLayers => http://leaflet-extras.github.io/leaflet-providers/preview/
