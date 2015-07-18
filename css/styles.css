@@ -58,7 +58,11 @@ body > .container {
   z-index: 10;
 }
 
-
+/*
+.LocateButton .loading {
+background-image: url("http://js.arcgis.com/3.14/esri/css/../dijit/images/locate-spinner.gif")
+}
+*/
 .LocateButton .zoomLocateButton {
   color: #4C4C4C;
   text-align: center;

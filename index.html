@@ -85,23 +85,23 @@
     <div id="mapDiv" class="map"></div>
     <div id="search"></div>
     <div id="LocateButton"></div>
+    <div id="spinner"></div>
   </div>
 
   <footer class="footer">
     <div class="container">
-      <p class="text-muted"><a href="#" id="w3wlink" target="_blank"><img src="./img/w3w_logo.png" alt="go to w3w" width="23" height="30"></a>
-        &nbsp;<span id="w3Words" class="pannel"></span></p>
+      <p class="text-muted">
+        <a href="#" id="w3wlink" target="_blank">
+          <img src="./img/w3w_logo.png" alt="go to w3w" width="23" height="30">
+        </a>
+        &nbsp;
+        <span id="w3Words" class="pannel"></span>
+      </p>
       <p class="text-muted">position:
         <span id="w3wPosition" class="pannel"></span>
       </p>
     </div>
   </footer>
-
-
-  <!--<div id="lang-wrapper" class="visibility: hidden; display: none;" >
-    <select name="lang" id="lang" class="pannel">
-    </select>
-  </div>-->
 
   <script type="text/javascript">
     var pckgPath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
@@ -111,6 +111,9 @@
       packages: [{
         name: 'app',
         location: pckgPath + '/js'
+      }, {
+        name: 'spin-js',
+        location: '//fgnass.github.io/spin.js/'
       }]
     };
   </script>
