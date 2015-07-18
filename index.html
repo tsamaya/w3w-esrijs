@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="//js.arcgis.com/3.14/esri/css/esri.css" />
   <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,300">
   <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <!--<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
+  <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrapmap.css" />
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
   <style>
@@ -46,7 +46,6 @@
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">Map</a></li>
-          <!--<li><a href="#about">About</a></li>-->
           <li class="dropdown" id="basemapList">
             <a href="" class="dropdown-toggle" data-toggle="dropdown">Basemaps <b class="caret"></b></a>
             <ul class="dropdown-menu" id="myDropdownBasemaps">
@@ -74,6 +73,7 @@
             <ul class="dropdown-menu" id="myDropdownLanguages">
             </ul>
           </li>
+          <li><a href="#about" id="about-btn">About</a></li>
         </ul>
       </div>
       <!--/.nav-collapse -->
@@ -102,6 +102,57 @@
       </p>
     </div>
   </footer>
+
+  <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button class="close" type="button" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">what3words with ArcGIS API for Javascript</h4>
+        </div>
+        <div class="modal-body">
+          <ul class="nav nav-tabs" id="aboutTabs">
+            <li class="active"><a href="#about" data-toggle="tab"><i class="fa fa-question-circle"></i>&nbsp;About the project</a></li>
+            <li><a href="#resources" data-toggle="tab"><i class="fa fa-globe"></i>&nbsp;Resources</a></li>
+          </ul>
+          <div class="tab-content" id="aboutTabsContent">
+            <div class="tab-pane fade active in" id="about">
+              <p><a href="//what3words.com" target="_blank">what3words</a> addressing the world with <a href="//js.arcgis.com" target="_blank">ArcGIS API for Javascript</a>. This application demonstrates integration of ArcGIS API for JavaScript API with what3words API; Open source, Apache 2.0 licensed, and available on <a href="https://github.com/tsamaya/w3w-esrijs" target="_blank">GitHub</a>.</p>
+              <p>Made in <a href="?rumble.classed.farmland">Grenoble</a> by <a href="//twitter.com/arferrand" target="_">Arnaud Ferrand</a>, July 2015</p>
+              <div class="panel panel-secondary">
+                <div class="panel-heading">Features</div>
+                <ul class="list-group">
+                  <li class="list-group-item">what3words on map click</li>
+                  <li class="list-group-item">what3words on geocoding addresses</li>
+                  <li class="list-group-item">position with a what3words (word.word.word) in search input</li>
+                  <li class="list-group-item">what3words on device locate</li>
+                </ul>
+              </div>
+            </div>
+            <div id="resources" class="tab-pane fade">
+              <p></p>
+              <div class="panel panel-primary">
+                <div class="panel-heading">Resources</div>
+                <ul class="list-group">
+                  <li class="list-group-item"><a href="//what3words.com" target="_blank">what3words</a> addressing the world</li>
+                  <li class="list-group-item"><a href="//js.arcgis.com" target="_blank">ArcGIS API for JavaScript</a></li>
+                  <li class="list-group-item"><a href="http://esri.github.io/bootstrap-map-js/demo/index.html" target="_blank">Bootstrap-map-js</a></li>
+                  <li class="list-group-item"><a href="//jquery.com" target="_blank">JQuery</a></li>
+                  <li class="list-group-item"><a href="//getbootstrap.com" target="_blank">Bootstrap</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 
   <script type="text/javascript">
     var pckgPath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));

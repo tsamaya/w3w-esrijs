@@ -1,6 +1,7 @@
 /* --------------------------------------------------
  Custom CSS
 -------------------------------------------------- */
+
 html {
   position: relative;
   min-height: 100%;
@@ -21,7 +22,6 @@ body {
   height: 120px;
   background-color: #e6323d;
 }
-
 .navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
   /*border-bottom: 2px solid white;*/
   color: #fff;
@@ -30,7 +30,8 @@ body {
   color: #fff;
 }
 body > .container {
-  padding: 40px 0 0; /*15px 0;*/
+  padding: 40px 0 0;
+  /*15px 0;*/
   width: 100%
 }
 .container .text-muted {
@@ -50,7 +51,6 @@ body > .container {
 .navbar-default .navbar-nav>li>a, .navbar-default .navbar-brand {
   color: #fff
 }
-
 #search {
   position: absolute;
   top: 60px;
@@ -63,20 +63,17 @@ body > .container {
 background-image: url("http://js.arcgis.com/3.14/esri/css/../dijit/images/locate-spinner.gif")
 }
 */
+
 .LocateButton .zoomLocateButton {
   color: #4C4C4C;
   text-align: center;
   cursor: pointer;
-  border-radius: 5px 5px 0 0;
-
   background-image: url("../img/locateblack.png");
   background-color: #eee;
 }
-
 .LocateButton .zoomLocateButton:hover {
   background-color: #ccc;
 }
-
 #LocateButton {
   position: absolute;
   top: 120px;
@@ -99,8 +96,10 @@ background-image: url("http://js.arcgis.com/3.14/esri/css/../dijit/images/locate
   .navbar-default .navbar-nav .open .dropdown-menu>li>a {
     color: #fff;
   }
-
-  .navbar-default .navbar-toggle .icon-bar  {
+  .arcgisSearch .searchGroup .searchInput {
+    width: 170px;
+  }
+  .navbar-default .navbar-toggle .icon-bar {
     background-color: #fff;
   }
 }
