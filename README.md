@@ -3,7 +3,7 @@
 
 [View it live](http://tsamaya.github.io/w3w-esrijs/)
 
-![App Screenshot](https://raw.githubusercontent.com/tsamaya/w3w-esrijs/master/w3w-esrijs.png)
+![App Screenshot](https://raw.githubusercontent.com/tsamaya/w3w-esrijs/master/img/w3w-esrijs.png)
 
 The application demonstrates integration of ArcGIS API for JavaScript API with what3words API.
 
