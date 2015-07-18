@@ -144,6 +144,9 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   $(document).ready(jQueryReady);
 
   function handleMapClick(event) {
+    if( s.value && s.value.length > 0) {
+      s.clear();
+    }
     updateMarker(event.mapPoint);
   }
 
