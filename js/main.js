@@ -113,6 +113,21 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   s.on('select-result', function(e) {
     updateMarker(e.result.feature.geometry);
   });
+  s.on('search-results', function(e) {
+    console.log(e);
+  });
+  s.on('suggest-results', function (e) {
+    console.log(e);
+    // is it a w3w ? two dots and no space
+    var w3wSearch = (e.value.split('.').length === 3) && (e.value.split(' ').length=== 1 );
+    if( w3wSearch ) {
+      initPosition(e.value, function() {
+        spinner.spin(spinnerTarget);
+        updateW3w();
+        updateMarkerWithLatLng();
+      });
+    }
+  });
   // geolocate widget
   var geoLocate = new LocateButton({
     map: map,
@@ -122,7 +137,6 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   geoLocate.startup();
   // handle search result to update w3w marker and words
   geoLocate.on('locate', function(e) {
-    //spinner.stop();
     //console.log(e);
     updateMarker(e.graphic.geometry);
   });
