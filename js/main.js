@@ -187,7 +187,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       spinner.spin(spinnerTarget);
       if( s.value && s.value.length > 0) {
         s.clear();
-      }      
+      }
     });
     $('#basemapList li').click(function(e) {
       clearBasemap();
@@ -271,6 +271,12 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       if ($('.navbar-collapse.in').length > 0) {
         $('.navbar-toggle').click();
       }
+    });
+
+    $('#about-btn').click(function() {
+      $('#aboutModal').modal('show');
+      $('.navbar-collapse.in').collapse('hide');
+      return false;
     });
 
   }

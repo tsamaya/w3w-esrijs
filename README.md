@@ -5,7 +5,7 @@
 
 ![App Screenshot](https://raw.githubusercontent.com/tsamaya/w3w-esrijs/master/img/w3w-esrijs.png)
 
-The application demonstrates integration of ArcGIS API for JavaScript API with what3words API.
+The application demonstrates integration of ArcGIS API for JavaScript with what3words API.
 
 ## Resources
 * [what3words](//what3words.com)
