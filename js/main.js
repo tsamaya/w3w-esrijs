@@ -220,11 +220,11 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
           map.addLayer(cycleMap);
           break;
       }
-      e.spinnerTarget.parentNode.className = 'active';
+      e.target.parentNode.className = 'active';
       if (selectedBasemap) {
         selectedBasemap.className = '';
       }
-      selectedBasemap = e.spinnerTarget.parentNode;
+      selectedBasemap = e.target.parentNode;
       if ($('.navbar-collapse.in').length > 0) {
         $('.navbar-toggle').click();
       }
@@ -262,13 +262,13 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
         //}
       });
       $('#languagesList li').click(function(e) {
-        lang = e.spinnerTarget.hash.substr(1);
+        lang = e.target.hash.substr(1);
         $('#languagesHref').text('[' + lang + ']');
-        e.spinnerTarget.parentNode.className = 'active';
+        e.target.parentNode.className = 'active';
         if (selectedLng) {
           selectedLng.className = '';
         }
-        selectedLng = e.spinnerTarget.parentNode;
+        selectedLng = e.target.parentNode;
         updateW3w();
         if ($('.navbar-collapse.in').length > 0) {
           $('.navbar-toggle').click();
