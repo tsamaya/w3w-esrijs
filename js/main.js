@@ -185,6 +185,9 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
 
     $('#LocateButton').click(function(e) {
       spinner.spin(spinnerTarget);
+      if( s.value && s.value.length > 0) {
+        s.clear();
+      }      
     });
     $('#basemapList li').click(function(e) {
       clearBasemap();
