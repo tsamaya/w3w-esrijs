@@ -114,10 +114,10 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     updateMarker(e.result.feature.geometry);
   });
   s.on('search-results', function(e) {
-    console.log(e);
+    //console.log(e);
   });
   s.on('suggest-results', function (e) {
-    console.log(e);
+    //console.log(e);
     // is it a w3w ? two dots and no space
     var w3wSearch = (e.value.split('.').length === 3) && (e.value.split(' ').length=== 1 );
     if( w3wSearch ) {
