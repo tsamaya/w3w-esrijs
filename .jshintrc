@@ -67,7 +67,7 @@
   "browserify": false, // Browserify (node.js code in the browser)
   "couch": false, // CouchDB
   "devel": true, // Development/debugging (alert, confirm, etc)
-  "dojo": false, // Dojo Toolkit
+  "dojo": true, // Dojo Toolkit
   "jasmine": false, // Jasmine
   "jquery": true, // jQuery
   "mocha": true, // Mocha
