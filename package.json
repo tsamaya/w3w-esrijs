@@ -1,0 +1,27 @@
+{
+  "name": "w3w-esrijs",
+  "version": "1.0.0",
+  "description": "what3words addressing the world with ArcGIS API for Javascript",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tsamaya/w3w-esrijs.git"
+  },
+  "keywords": [
+    "what3words",
+    "esri",
+    "javascript"
+  ],
+  "author": "Arnaud Ferrand",
+  "license": "APACHE",
+  "bugs": {
+    "url": "https://github.com/tsamaya/w3w-esrijs/issues"
+  },
+  "homepage": "https://github.com/tsamaya/w3w-esrijs",
+  "devDependencies": {
+    "jshint": "^2.8.0"
+  }
+}
