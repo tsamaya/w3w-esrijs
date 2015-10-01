@@ -1,4 +1,3 @@
-// WARNING this is not a production code, this is only a draft !
 require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLayer',
   'esri/geometry/Point', 'esri/SpatialReference', 'esri/graphic', 'esri/geometry/webMercatorUtils',
   'app/bootstrapmap', 'esri/dijit/Search', 'esri/dijit/LocateButton',
@@ -347,6 +346,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
         var w3w = response.words[0] + '.' + response.words[1] + '.' + response.words[2];
         $('#w3Words').text(w3w);
         $('#w3wlink').attr('href', 'http://w3w.co/' + w3w);
+        $('#selflink').attr('href', '?' + w3w);
         $('#w3wPosition').text(response.position[0] + ', ' + response.position[1]);
       }
     });
