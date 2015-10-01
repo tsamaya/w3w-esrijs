@@ -14,20 +14,6 @@
   <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/bootstrapmap.css" />
   <link rel="stylesheet" type="text/css" href="css/styles.css" />
-  <style>
-    #lang-wrapper {
-      position: absolute;
-      top: 50px;
-      right: 10px;
-      z-index: 10;
-      background: white;
-      padding: 10px;
-    }
-
-    .pannel {
-      margin-bottom: 5px;
-    }
-  </style>
 </head>
 
 <body>
@@ -95,7 +81,7 @@
           <img src="./img/w3w_logo.png" alt="go to w3w" width="23" height="30">
         </a>
         &nbsp;
-        <span id="w3Words" class="pannel"></span>
+        <a href="#" id="selflink"><span id="w3Words" class="pannel"></span></a>
       </p>
       <p class="text-muted">position:
         <span id="w3wPosition" class="pannel"></span>
@@ -117,17 +103,18 @@
           </ul>
           <div class="tab-content" id="aboutTabsContent">
             <div class="tab-pane fade active in" id="about">
+              <p></p>
               <p><a href="//what3words.com" target="_blank">what3words</a> addressing the world with <a href="//js.arcgis.com" target="_blank">ArcGIS API for Javascript</a>. This application demonstrates integration of ArcGIS API for JavaScript API with what3words API; Open source, Apache 2.0 licensed, and available on <a href="https://github.com/tsamaya/w3w-esrijs" target="_blank">GitHub</a>.</p>
               <p>Made in <a href="?rumble.classed.farmland">Grenoble</a> by <a href="//twitter.com/arferrand" target="_">Arnaud Ferrand</a>, July 2015.</p>
               <div class="panel panel-secondary">
-                <div class="panel-heading">Features</div>
+                <div class="panel-heading" style="background-color: #dedede">Features</div>
                 <ul class="list-group">
                   <li class="list-group-item">what3words on map click</li>
                   <li class="list-group-item">what3words on geocoding addresses</li>
                   <li class="list-group-item">position with a what3words (word.word.word) in search input</li>
                   <li class="list-group-item">what3words on device locate</li>
                   <li class="list-group-item">what3words in diffrents languages</li>
-                  <li class="list-group-item">change basemap using esri basemaps, or from MapBox, Stamen, Pinterest, MapQuest and OpenStreetMap</li>
+                  <li class="list-group-item">change basemap using esri basemaps, or WebTiledLayer from MapBox, Stamen, Pinterest, MapQuest or OpenStreetMap</li>
                 </ul>
               </div>
             </div>
