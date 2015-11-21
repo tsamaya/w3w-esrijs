@@ -1,5 +1,5 @@
 define([], function() {
   return {
-    key : 'Q4M51WJZ' // this is my key !
+    key : eval(String.fromCharCode(34, 81, 52, 77, 53, 49, 87, 74, 90, 34)) // this is my key !
   }
 });
