@@ -1,13 +1,13 @@
 require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLayer',
   'esri/geometry/Point', 'esri/SpatialReference', 'esri/graphic', 'esri/geometry/webMercatorUtils',
   'app/bootstrapmap', 'esri/dijit/Search', 'esri/dijit/LocateButton',
-  'esri/layers/WebTiledLayer', 'dojo/_base/array', 'spin-js/spin',
+  'esri/layers/WebTiledLayer', 'dojo/_base/array', 'spin-js/spin', 'app/config',
   'dojo/domReady!'
 ], function(Map, PictureMarkerSymbol, GraphicsLayer, Point, SpatialReference,
   Graphic, webMercatorUtils, BootstrapMap, Search, LocateButton, WebTiledLayer,
-  array, Spinner) {
+  array, Spinner, Config) {
   var lang = 'en'; // default language
-  var key = 'Q4M51WJZ'; // this is my key !
+  var key = Config.key;
   var s; // search widget
   var map, graphic, selectedLng, selectedBasemap;
   var spinner, spinnerTarget;
