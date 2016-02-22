@@ -335,7 +335,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       'position': '\'' + w3wmarker.lat + ',' + w3wmarker.lng + '\''
     };
     spinner.spin(spinnerTarget);
-    $.post('http://api.what3words.com/position', data, function(response) {
+    $.post('https://api.what3words.com/position', data, function(response) {
       spinner.stop();
       if (response.error) {
         console.log(response);
@@ -358,7 +358,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
       'string': decodeURIComponent(words)
     };
 
-    $.post('http://api.what3words.com/w3w', data, function(response) {
+    $.post('https://api.what3words.com/w3w', data, function(response) {
       if (!response.error) {
         w3wmarker.lat = response.position[0];
         w3wmarker.lng = response.position[1];
