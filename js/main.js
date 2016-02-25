@@ -11,7 +11,8 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   var s; // search widget
   var map, graphic, selectedLng, selectedBasemap;
   var spinner, spinnerTarget;
-  var w3wmarkerSymbol = new PictureMarkerSymbol('./img/w3wmarker.png', 35, 35);
+  var w3wmarkerSymbol = new PictureMarkerSymbol('./img/w3wmarker.png', 52, 65);
+  w3wmarkerSymbol.yoffset = 33;
 
   // default position is downtown Grenoble, France
   // var w3wmarker = {
