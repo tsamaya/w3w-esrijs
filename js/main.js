@@ -299,7 +299,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     };
     //var langs = $('#lang'); // tant que cela fonctionne pas avec la navbar !
     var w3wul = $('#languagesList ul');
-    $.post('https://api.what3words.com/get-languages', data, function(response) {
+    $.get('https://api.what3words.com/v2/languages', data, function(response) {
       //console.log(response);
       $.each(response.languages, function() {
         // if (this.code === 'fr') {
@@ -308,7 +308,7 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
         //   $('#languagesHref').text('[fr]');
         //} else {
         //langs.append($('<option />').val(this.code).text(this.name_display));
-        w3wul.append($('<li />').append($('<a />').attr('href', '#' + this.code).text(this.name_display)));
+        w3wul.append($('<li />').append($('<a />').attr('href', '#' + this.code).text(this.name)));
         //}
       });
       $('#languagesList li').click(function(e) {
@@ -333,10 +333,10 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
     var data = {
       'key': key,
       'lang': lang,
-      'position': '\'' + w3wmarker.lat + ',' + w3wmarker.lng + '\''
+      'coords': w3wmarker.lat + ',' + w3wmarker.lng
     };
     spinner.spin(spinnerTarget);
-    $.post('https://api.what3words.com/position', data, function(response) {
+    $.get('https://api.what3words.com/v2/reverse', data, function(response) {
       spinner.stop();
       if (response.error) {
         console.log(response);
@@ -344,11 +344,11 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
           $('#w3Words').text(response.message);
         }
       } else {
-        var w3w = response.words[0] + '.' + response.words[1] + '.' + response.words[2];
+        var w3w = response.words;
         $('#w3Words').text(w3w);
         $('#w3wlink').attr('href', 'http://w3w.co/' + w3w);
         $('#selflink').attr('href', '?' + w3w);
-        $('#w3wPosition').text(response.position[0] + ', ' + response.position[1]);
+        $('#w3wPosition').text(response.geometry.lat + ', ' + response.geometry.lng);
       }
     });
   }
@@ -356,13 +356,13 @@ require(['esri/map', 'esri/symbols/PictureMarkerSymbol', 'esri/layers/GraphicsLa
   function initPosition(words, callback) {
     var data = {
       'key': key,
-      'string': decodeURIComponent(words)
+      'addr': decodeURIComponent(words)
     };
 
-    $.post('https://api.what3words.com/w3w', data, function(response) {
+    $.get('https://api.what3words.com/v2/forward', data, function(response) {
       if (!response.error) {
-        w3wmarker.lat = response.position[0];
-        w3wmarker.lng = response.position[1];
+        w3wmarker.lat = response.geometry.lat;
+        w3wmarker.lng = response.geometry.lng;
         callback('ok');
       } else {
         console.log(response);
